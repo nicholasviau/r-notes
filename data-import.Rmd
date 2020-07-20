@@ -1,0 +1,29 @@
+# Data Import
+
+## Reading in Multiple Files
+
+You may want to read in multiple files at the same time. For example, you have dozens of `.csv` files with a common structure that you wish to import and combine as a single data frame, or perhaps they are of varying sizes and wish to save them as a list of dataframes. 
+
+### Common Structure
+
+```{r}
+combined <- map_dfr(files, read_csv)
+```
+
+Sometimes I prefer to save the the file location of the original `.csv` file. To do this, you must construct an **anonymous function** with further arguments.
+
+```{r}
+combined <- map_dfr(files, ~{
+  read_csv(.x) %>%
+    mutate(file = .x)
+})
+```
+
+### Different Structure
+
+Use 
+
+```{r}
+paste(rep("c", 20), collapse = "")
+```
+

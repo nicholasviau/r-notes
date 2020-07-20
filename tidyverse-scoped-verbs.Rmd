@@ -1,0 +1,17 @@
+# Scoped Verbs
+
+The scoped verbs need three things to work:
+
+1. Data
+2. A **predicate function** (i.e., a function that returns `TRUE` OR `FALSE`) that selects the columns we wish to work with.
+3. 
+
+The following functions follow the `verb_*()` syntax, where `verb` is the function and `*` represents the scope.
+
+## `filter_*()`
+
+## Renaming
+
+```{r}
+iris %>% rename_all(toupper)
+```

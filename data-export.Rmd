@@ -1,0 +1,37 @@
+# Data Export
+
+## Writing Multiple File to Disk
+
+I like to save binary file types to disk, specifically `.csv` files.
+
+```{r}
+library(purrr)
+library(gapminder)
+
+gapminder <- gapminder %>%
+  filter(country %in% c("United States", "Canada", "Mexico"))
+
+gapminder %>%
+    nest(-country) %>%
+    pwalk(~write_csv(x = .y, path = paste0(.x, ".csv")))
+```
+
+In the code above:
+
+* `.y` is the column containing the individual data frames of each country. It is the data which will be passed to the first argument of `read_csv()`. 
+* `.x` will be the first column containing the country name, it we will use it to construct the system path for where the `.csv` file will be saved.
+
+## Cleaning Things Up
+
+In the code above we used the first data column as our indexing term for the `.csv` files. While this is quick and effective, there are several problems with the approach:
+
+* We lose the data column when nesting.
+* The names of the countries are not consistently formatted. For example, they have varying case use and there are spaces present in the names (e.g., "United States"). What to do?
+
+I often find it useful to create indexing values. For this dataset, it's as simple as removing the case and replacing the gaps with a separation chracter such as an under (`_`) or a dash (`-`).
+
+```{r}
+gapminder %>%
+  mutate(id = paste)
+```
+

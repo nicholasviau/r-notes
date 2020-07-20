@@ -1,0 +1,34 @@
+# summarise()
+
+```{r}
+library(tidyverse)
+```
+
+## dplyr 1.0.0 Changes
+
+* See the [article](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-summarise/).
+* Improved control of grouping.
+
+## Grouping Changes
+
+Let's load the `starwars` dataset and check out what we're talking about.
+
+```{r}
+head(starwars)
+```
+
+
+```{r}
+starwars %>% 
+  group_by(homeworld, species) %>% 
+  summarise(n = n())
+```
+
+
+You can alwasy override the message with `options(dplyr.summarise.inform = FALSE)`. 
+
+Also keep in mind that `.groups` is an experimental phase of development, meaning it may change in the future.
+
+
+
+

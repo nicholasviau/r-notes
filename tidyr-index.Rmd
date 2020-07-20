@@ -1,0 +1,21 @@
+# tidyr
+
+```{r, echo=FALSE}
+library(tidyverse)
+```
+
+## Outline of the Chapter {-}
+
+* **tidyr**
+  * pivot_longer
+  * pivot_wider
+  * separate
+  * separate_rows
+  * unite
+  * nest
+
+* **dplyr**
+
+* Scoped Verbs
+
+* Converting Nested Lists Into Tibbles - https://tidyr.tidyverse.org/articles/rectangle.html

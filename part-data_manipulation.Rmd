@@ -1,0 +1,20 @@
+# (PART) Data Wrangling {-}
+
+# Introduction {-}
+
+Data wrangling is another term for data manipulation. Data wrangling is also called **data munging**, or **data processing**. It includes a variety of tasks such a reshaping data, tranforming, all with the goal of producing data that is consistent and useful form.
+
+As explained earlier, most of the packages covered in this section belong to the **tidyverse** suite of packages.
+
+## Overview of Data Manipulation Packages {-}
+
+The workhorse packages of the tidyverse are **tidyr** and **dplyr**. In general, we use **tidyr** for *reshaping* the overall structure of data and we use **dplyr** to *manipulate* it. I say "in general" because some functions from tidyr may seem like they are manipulation tasks, and some form dpylr may seem like they are reshaping tasks.
+
+## Outline {-}
+
+* **`tidyr` - Data Reshaping**
+* **`dplyr` - Data Manipulation**
+* **`purrr` - Functional Programming for Data Manipulation** - Here we will look how we can use purrr's functional prgramming tools for our data manipulation tasks.
+* **`tidyverse` - The Pipe Operator**
+* **`tidyverse` - Scoping**
+* **`tidyverse` - Basic Tidy Evaluation** - Basic tidy evaluation methods to making some of your work more concise.

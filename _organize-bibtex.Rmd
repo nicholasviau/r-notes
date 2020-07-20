@@ -1,0 +1,5 @@
+# BibTex
+
+This can be a bit unwieldy in R. To dive deeper,
+
+* [A Roundup of R Tools for Handling BibTeX](https://ropensci.org/technotes/2020/05/07/rmd-citations/) (May 7, 2020)

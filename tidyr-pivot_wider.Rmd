@@ -1,0 +1,9 @@
+## Pivot Wider
+
+```{r, include=FALSE}
+library(tidyverse)
+```
+
+[`pivot_wider()` Offical Documentation](https://tidyr.tidyverse.org/reference/pivot_wider.html)
+
+We use `pivot_wider()` when we want to go from a "wide" to a "longer" dataset. In more formal words, we use this function where we have columns that should not be columns and instead be different levels of a factor variable. This is common if much of your exposure to datawork has been in spreadsheets. Sometimes this is obvious, sometimes not.

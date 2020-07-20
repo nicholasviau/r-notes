@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 NA Values | Nick’s R Notes</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 NA Values | Nick’s R Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 NA Values | Nick’s R Notes" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Nicholas Edward Viau" />
+
+
+<meta name="date" content="2020-07-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="case-when.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Nick's R Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>I dplyr</b></span></li>
+<li class="chapter" data-level="1" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>1</b> dplyr</a></li>
+<li class="chapter" data-level="2" data-path="if-else.html"><a href="if-else.html"><i class="fa fa-check"></i><b>2</b> <code>if_else()</code></a></li>
+<li class="chapter" data-level="3" data-path="case-when.html"><a href="case-when.html"><i class="fa fa-check"></i><b>3</b> <code>case_when()</code></a><ul>
+<li class="chapter" data-level="3.1" data-path="case-when.html"><a href="case-when.html#using-case_when-with-text-data"><i class="fa fa-check"></i><b>3.1</b> Using <code>case_when()</code> With Text Data</a></li>
+<li class="chapter" data-level="3.2" data-path="case-when.html"><a href="case-when.html#wrapping-case_when-inside-functions"><i class="fa fa-check"></i><b>3.2</b> Wrapping <code>case_when()</code> Inside Functions</a></li>
+<li class="chapter" data-level="3.3" data-path="case-when.html"><a href="case-when.html#using-case_when-with-na-values"><i class="fa fa-check"></i><b>3.3</b> Using <code>case_when()</code> With NA Values</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="case-when.html"><a href="case-when.html#na-as-a-condition"><i class="fa fa-check"></i><b>3.3.1</b> NA as a Condition</a></li>
+<li class="chapter" data-level="3.3.2" data-path="case-when.html"><a href="case-when.html#converting-to-na"><i class="fa fa-check"></i><b>3.3.2</b> Converting to NA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="na-values.html"><a href="na-values.html"><i class="fa fa-check"></i><b>4</b> NA Values</a><ul>
+<li class="chapter" data-level="4.1" data-path="na-values.html"><a href="na-values.html#replacing-na-values"><i class="fa fa-check"></i><b>4.1</b> Replacing NA Values</a></li>
+<li class="chapter" data-level="4.2" data-path="na-values.html"><a href="na-values.html#assigning-na-values"><i class="fa fa-check"></i><b>4.2</b> Assigning NA Values</a></li>
+<li class="chapter" data-level="4.3" data-path="na-values.html"><a href="na-values.html#using-filter-with-na-values"><i class="fa fa-check"></i><b>4.3</b> Using <code>filter()</code> with NA Values</a></li>
+<li class="chapter" data-level="4.4" data-path="na-values.html"><a href="na-values.html#dropping-na-values"><i class="fa fa-check"></i><b>4.4</b> Dropping NA Values</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Nick’s R Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="na-values" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> NA Values</h1>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co"># df &lt;- tibble(x = c(1, NA, 3))</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">             <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">             <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>))</a></code></pre></div>
+<div id="replacing-na-values" class="section level2">
+<h2><span class="header-section-number">4.1</span> Replacing NA Values</h2>
+<p>Replacing NA values in a dataframe is simple.</p>
+<p>You can place the <code>replace_na()</code> function inside of mutate:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x =</span> <span class="kw">replace_na</span>(x, <span class="dv">0</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x     y     z
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     4     6
+## 2     0    NA     7
+## 3     3    NA     8</code></pre>
+<p>And using scoped verbs:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="op">~</span><span class="kw">replace_na</span>(., <span class="st">&quot;Unknown&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   x       y       z    
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;
+## 1 1       4       6    
+## 2 Unknown Unknown 7    
+## 3 3       Unknown 8</code></pre>
+<p>Or you can specify variables wrapped inside <code>list()</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="st">&quot;unknown&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x y           z
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+## 1     1 4           6
+## 2     0 unknown     7
+## 3     3 unknown     8</code></pre>
+</div>
+<div id="assigning-na-values" class="section level2">
+<h2><span class="header-section-number">4.2</span> Assigning NA Values</h2>
+<p>Sometimes you most to convert values to <code>NA</code> manually. Here we have <code>NA</code> values stored as a word vector “NA”. (Be sure to see options for automatically converting NA values when you import data here.) For these tasks, <code>dplyr::na_f()</code> is is particularly useful wrapped inside of <code>mutate()</code>, as it is meant to work on vectors rather than entire data frames.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">             <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;NA&quot;</span>, <span class="st">&quot;NA&quot;</span>),</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">             <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="st">&quot;NA&quot;</span>, <span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">df</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 dog   6    
+## 2    NA NA    NA   
+## 3     3 NA    8</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">na_if</span>(y, <span class="st">&quot;NA&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 dog   6    
+## 2    NA &lt;NA&gt;  NA   
+## 3     3 &lt;NA&gt;  8</code></pre>
+<p>As before, you can easily scope it:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="op">~</span><span class="kw">na_if</span>(., <span class="st">&quot;NA&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 dog   6    
+## 2    NA &lt;NA&gt;  &lt;NA&gt; 
+## 3     3 &lt;NA&gt;  8</code></pre>
+<p>What if you have multiple different values? For example, imagine you have columns which contain a dash for certain NA values and a literal character string <code>&quot;NA&quot;</code> for others.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">             <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;NA&quot;</span>, <span class="st">&quot;NA&quot;</span>),</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">             <span class="dt">z =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="st">&quot;-&quot;</span>, <span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">df</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 dog   6    
+## 2    NA NA    -    
+## 3     3 NA    8</code></pre>
+<p>This is a bit tricky (you can read why <a href="https://github.com/tidyverse/dplyr/issues/1972">here</a>). At the moment there are several options:</p>
+<ul>
+<li>Manually convert each column.</li>
+<li>Create a custom function.</li>
+<li>Replace a selection of known NA value representations and then use <code>na_if()</code>.</li>
+<li>The <a href="https://github.com/njtierney/naniar">naniar</a> package.</li>
+</ul>
+<p>More on this later.</p>
+<div id="the-naniar-package" class="section level4">
+<h4><span class="header-section-number">4.2.0.1</span> The naniar Package</h4>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">library</span>(naniar)</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_with_na</span>(<span class="dt">replace =</span> <span class="kw">list</span>(<span class="dt">y =</span> <span class="st">&quot;NA&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 dog   6    
+## 2    NA &lt;NA&gt;  -    
+## 3     3 &lt;NA&gt;  8</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span>naniar<span class="op">::</span><span class="kw">replace_with_na_all</span>(<span class="dt">condition =</span> <span class="op">~</span>.x <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;NA&quot;</span>, <span class="st">&quot;-&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 dog   6    
+## 2    NA &lt;NA&gt;  &lt;NA&gt; 
+## 3     3 &lt;NA&gt;  8</code></pre>
+</div>
+</div>
+<div id="using-filter-with-na-values" class="section level2">
+<h2><span class="header-section-number">4.3</span> Using <code>filter()</code> with NA Values</h2>
+<p><code>filter()</code> will only include rows where the condition evaluates to <code>TRUE</code> and thus excludes <code>NA</code> values present in your data. This is problematic because often <code>NA</code> values are important. If you wish to return <code>NA</code> values, ask for them explicitly.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># This will exclude NA values</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw">filter</span>(df, x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     3 NA    8</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="co"># Now include NA</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">filter</span>(df, <span class="kw">is.na</span>(x) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##       x y     z    
+##   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+## 1    NA NA    -    
+## 2     3 NA    8</code></pre>
+</div>
+<div id="dropping-na-values" class="section level2">
+<h2><span class="header-section-number">4.4</span> Dropping NA Values</h2>
+<ul>
+<li>Drop rows with NA vlaues with <a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a>.</li>
+<li><code>drop_na()</code> supports scoping.</li>
+</ul>
+<p>Example from the official documentation:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;b&quot;</span>))</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##       x y    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 a</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>(x)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##       x y    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 a    
+## 2     2 &lt;NA&gt;</code></pre>
+<p>You can also use base R’s <code>na.omit()</code> wrapped inside of <code>filter()</code>:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(x))</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##       x y    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 a    
+## 2     2 &lt;NA&gt;</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="case-when.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["nicks-r-notes.pdf", "nicks-r-notes.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

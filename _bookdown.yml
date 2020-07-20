@@ -1,0 +1,20 @@
+book_filename: "nicks-r-notes"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
+rmd_files: [
+  "index.Rmd",
+  
+  "dplyr-index.Rmd",
+  "dplyr-if_else.Rmd",
+  "dplyr-case_when.Rmd",
+  
+  # "part-data_manipulation.Rmd",
+  # "tidyr-index.Rmd",
+  # "tidyr-pivot_longer.Rmd",
+  # "tidyr-pivot_wider.Rmd",
+  
+  "data-na-values.Rmd"
+
+]

@@ -1,0 +1,82 @@
+# `case_when()`
+
+The `case_when()` function is a generalization of `if_else()`. Use `case_when()` if you find yourself needing multiple `if_else()` statements.
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+This example is from the [official documention](https://dplyr.tidyverse.org/reference/case_when.html):
+
+```{r}
+starwars %>%
+  select(name:mass, gender, species) %>%
+  mutate(
+    type = case_when(
+      height > 200 | mass > 200 ~ "large",
+      species == "Droid"        ~ "robot",
+      TRUE                      ~ "other"
+    )
+  )
+```
+
+## Using `case_when()` With Text Data
+
+You can use `case_when()` to create new variables based on the presence of certain strings. You can combine it with `str_detect()` or base R's `grepl()`.
+
+```{r}
+
+```
+
+## Wrapping `case_when()` Inside Functions
+
+Keep in mind that `case_when()` is not a tidy eval function. "If you'd like to reuse the same patterns, extract the `case_when()` call in a normal function:"
+
+## Using `case_when()` With NA Values
+
+### NA as a Condition
+
+```{r}
+df <- tibble(x = c(1, NA, 3),
+             y = c("dog", NA, NA))
+
+df
+```
+
+```{r}
+df %>%
+  mutate(
+    status = case_when(
+      is.na(x) ~ "Unknown",
+      TRUE ~ "Complete"
+  ))
+```
+
+### Converting to NA
+
+You must be very precise with type delcaration when dealing with `NA` values with `case_when()`. `NA` is of type logical, but if you are using `case_when()` to recode you must use the right sorts or you will get an error. The types include:
+
+* `NA_real_`
+* `NA_character_`
+* `NA_integer_`
+* `NA_complex_`
+
+Here an error will be thrown:
+
+```{r, eval=FALSE}
+iris %>% mutate(
+  Sepal.Width = case_when(
+    Sepal.Length == 5.1 ~ NA,
+    TRUE ~ 2)) %>% head
+```
+
+But when we are type-specific:
+
+```{r}
+iris %>% mutate(
+  Sepal.Width = case_when(
+    Sepal.Length == 5.1 ~ NA_real_,
+    TRUE ~ 2)) %>% head
+```
+

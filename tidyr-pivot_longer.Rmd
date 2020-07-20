@@ -1,0 +1,19 @@
+## Pivot Longer
+
+```{r, include=FALSE}
+library(tidyverse)
+```
+
+[`pivot_longer()` Offical Documentation](https://tidyr.tidyverse.org/reference/pivot_longer.html)
+
+We use `pivot_longer()` when we want to go from a "wide" to a "longer" dataset. In more formal words, we use this function where we have columns that should not be columns and instead be different levels of a factor variable. This is common if much of your exposure to datawork has been in spreadsheets. Sometimes this is obvious, sometimes not.
+
+```{r}
+head(relig_income)
+```
+
+```{r}
+relig_income %>%
+  pivot_longer(-religion, names_to = "income", values_to = "count") %>%
+  head()
+```

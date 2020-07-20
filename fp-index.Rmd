@@ -1,0 +1,27 @@
+# Functional Programming
+
+What is functional programming? In short, if you are repeating yourself in your code, you should probably write a function. Within functional programming, functions should be the workhorses of your tasks, and most actions should be some impementations of functions you or somebody else has constructed.
+
+R is not a _pure_ functional language, and to become adept at functional programming in R, one must have a certain degree of discipline.
+
+Among the benefits are:
+
+* Code is easier to fix and maintain.
+* Easier to read.
+* Just generally cuts down on clutter (helps avoid [spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) and the [pyramid of doom](https://en.wikipedia.org/wiki/Pyramid_of_doom_%28programming%29).
+
+
+## Map and Reduce
+
+* **Map** -
+
+* **Reduce** - 
+
+## From Loops to Recursion
+
+
+## Functional Programming Resources
+
+#### Blog Posts
+
+* [Cleaner R Code With Functional Programming](https://towardsdatascience.com/cleaner-r-code-with-functional-programming-adc37931ef7a)

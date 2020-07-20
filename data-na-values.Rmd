@@ -1,0 +1,123 @@
+# NA Values
+
+```{r}
+library(tidyverse)
+
+# df <- tibble(x = c(1, NA, 3))
+
+df <- tibble(x = c(1, NA, 3),
+             y = c(4, NA, NA),
+             z = c(6, 7, 8))
+```
+
+## Replacing NA Values
+
+Replacing NA values in a dataframe is simple.
+
+You can place the `replace_na()` function inside of mutate:
+
+```{r}
+df %>%
+  mutate(x = replace_na(x, 0))
+```
+
+And using scoped verbs:
+
+```{r}
+df %>%
+  mutate_all(~replace_na(., "Unknown"))
+```
+
+Or you can specify variables wrapped inside `list()`:
+
+```{r}
+df %>% replace_na(list(x = 0, y = "unknown"))
+```
+
+## Assigning NA Values
+
+Sometimes you most to convert values to `NA` manually. Here we have `NA` values stored as a word vector "NA". (Be sure to see options for automatically converting NA values when you import data here.) For these tasks, `dplyr::na_f()` is is particularly useful wrapped inside of `mutate()`, as it is meant to work on vectors rather than entire data frames. 
+
+```{r}
+df <- tibble(x = c(1, NA, 3),
+             y = c("dog", "NA", "NA"),
+             z = c(6, "NA", 8))
+
+df
+```
+
+```{r}
+df %>%
+  mutate(y = na_if(y, "NA"))
+```
+
+As before, you can easily scope it:
+
+```{r}
+df %>%
+  mutate_all(~na_if(., "NA"))
+```
+
+What if you have multiple different values? For example, imagine you have columns which contain a dash for certain NA values and a literal character string `"NA"` for others.
+
+```{r}
+df <- tibble(x = c(1, NA, 3),
+             y = c("dog", "NA", "NA"),
+             z = c(6, "-", 8))
+
+df
+```
+
+This is a bit tricky (you can read why [here](https://github.com/tidyverse/dplyr/issues/1972)). At the moment there are several options:
+
+* Manually convert each column.
+* Create a custom function.
+* Replace a selection of known NA value representations and then use `na_if()`.
+* The [naniar](https://github.com/njtierney/naniar) package.
+
+More on this later.
+
+#### The naniar Package
+
+```{r}
+library(naniar)
+
+df %>% replace_with_na(replace = list(y = "NA"))
+```
+
+```{r}
+df %>%
+  naniar::replace_with_na_all(condition = ~.x %in% c("NA", "-"))
+```
+
+## Using `filter()` with NA Values
+
+`filter()` will only include rows where the condition evaluates to `TRUE` and thus excludes `NA` values present in your data. This is problematic because often `NA` values are important. If you wish to return `NA` values, ask for them explicitly.
+
+```{r}
+# This will exclude NA values
+filter(df, x > 1)
+
+# Now include NA
+filter(df, is.na(x) | x > 1)
+```
+
+## Dropping NA Values
+
+* Drop rows with NA vlaues with [`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html).
+* `drop_na()` supports scoping.
+
+Example from the official documentation:
+
+```{r}
+library(dplyr)
+df <- tibble(x = c(1, 2, NA), y = c("a", NA, "b"))
+df %>% drop_na()
+df %>% drop_na(x)
+```
+
+You can also use base R's `na.omit()` wrapped inside of `filter()`:
+
+```{r}
+df %>% filter(!is.na(x))
+```

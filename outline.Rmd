@@ -1,0 +1,80 @@
+# Data Manipulation
+
+```{r, echo=FALSE}}
+library(tidyverse)
+```
+
+## Ideas
+
+* **Tidyverse Mechanics** - This section will discuss certain mechanics of using tidyverse packages.
+  * Tibbles
+  * Row-wise operations
+  * Col-wise operations
+
+## Workhorse Packages
+
+The workhorse packages of the tidyverse are **tidyr** and **dplyr**. In general, we use **tidyr** for *reshaping* the overall structure of data and we use **dplyr** to *manipulate* it. I say "in general" because some functions from tidyr may seem like they are manipulation tasks, and some form dpylr may seem like they are reshaping tasks.
+
+## Outline of the Chapter
+
+* **PART - tidyr**
+  * Pivoting
+    * pivot_longer
+    * pivot_wider
+  * Separating and Uniting Columns
+    * separate
+    * unite
+  * Separating Rows
+    * separate_rows
+  * Nesting Data
+    * nest
+  * Unnesting Data 
+
+* **PART dplyr**
+  * Recoding
+    * if_else
+    * case_when
+
+* **PART - tidyverse Extras**
+  * Scoped Verbs
+  * Tibbles
+  * The Pipe
+
+* Converting Nested Lists Into Tibbles - https://tidyr.tidyverse.org/articles/rectangle.html
+
+
+
+*Personal organization only...*
+
+## Reshaping with `tidyr`
+
+We reshape data with `pivot_wider()` and `pivot_longer()`.
+
+### `pivot_longer()`
+
+[`pivot_longer()` Offical Documentation](https://tidyr.tidyverse.org/reference/pivot_longer.html)
+
+We use `pivot_longer()` when we want to go from a "wide" to a "longer" dataset. In more formal words, we use this function where we have columns that in fact should not be columns and instead be different levels of a factor variable. This is common if much of your exposure to datawork has been in spreadsheets. Sometimes this is obvious, sometimes not.
+
+```{r}
+head(relig_income)
+```
+
+```{r}
+relig_income %>%
+  pivot_longer(-religion, names_to = "income", values_to = "count") %>%
+  head()
+```
+
+#### Complex `pivot_longer()` Operations
+
+```{r}
+billboard %>%
+ pivot_longer(
+   cols = starts_with("wk"),
+   names_to = "week",
+   names_prefix = "wk",
+   values_to = "rank",
+   values_drop_na = TRUE
+ )
+```

@@ -1,0 +1,39 @@
+# (PART) purrr {-}
+
+R is a functional language. To facilitate functional style in R, the core tidyverse packages contain the **purrr** package, described as a "complete and consistent functional programming toolkit for R." 
+
+* **Map** - The map family of functions (`map(.x, ,f)`) transform each element of vector `.x` the the function `.f`. The `walk()` family is similar but is used only for side-effects - it returns `.x` invisibly.
+* **Predicate Functionals** - Functions that return logical `TRUE` or `FALSE`.
+* **Plucking** - Selecting single elements.
+* **Adverbs** - Adverbs modify the action of a function; they take in a function with partial arguments as input and return the function with the modified action as output.
+
+#### Further Resources
+
+The tools purrr provides are quite dynamic and can be applied to a large breadth of R problems. Some helpful resources on the topic:
+
+* Jenny Bryan's [purrr Tutorial](https://jennybc.github.io/purrr-tutorial/index.html) is great for using purrr with list structures. The methods are generelizable to working with data frames, too.
+
+## Map
+
+The `map()` family allows you to do away with `for` loops in many situations. This is useful because you can write shorter, less-verbose code. Another added benefit is that you do not need to initialise any new strucutre in R to hold your results.
+
+## Keep and Discard
+
+```{r}
+library(tidyverse)
+
+keep(iris, is.numeric)
+```
+
+## Possibly
+
+```{r}
+possible_max <- possibly(max, otherwise = NULL)
+map(iris, possible_max)
+```
+
+This base R version will fail:
+
+```{r}
+sapply(iris, max)
+```

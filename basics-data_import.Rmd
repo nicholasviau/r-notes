@@ -1,0 +1,3 @@
+# Importing Data
+
+> **Note:** This chapter will use some functional programming tools discussed later. For brevity, in-depth discussions of the functions will not be offered.
